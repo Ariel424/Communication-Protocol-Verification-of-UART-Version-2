@@ -23,13 +23,9 @@ uartrx
 #(clk_freq, baud_rate)
 rtx
 (clk, rst, rx, donerx, doutrx);    
-    
-    
+  
 endmodule
- 
- 
-//////////////////////////////////////////////////////////////////
- 
+
 module uarttx
 #(
 parameter clk_freq = 1000000,
@@ -43,7 +39,7 @@ output reg tx,
 output reg donetx
 );
  
-  localparam clkcount = (clk_freq/baud_rate); ///x
+localparam clkcount = (clk_freq/baud_rate); 
   
 integer count = 0;
 integer counts = 0;
@@ -52,7 +48,7 @@ reg uclk = 0;
   
 enum bit[1:0] {idle = 2'b00, start = 2'b01, transfer = 2'b10, done = 2'b11} state;
  
- ///////////uart_clock_gen
+ // uart_clock_gen
   always@(posedge clk)
     begin
       if(count < clkcount/2)
@@ -64,8 +60,8 @@ enum bit[1:0] {idle = 2'b00, start = 2'b01, transfer = 2'b10, done = 2'b11} stat
     end
   
   
-  reg [7:0] din;
-  ////////////////////Reset decoder
+ reg [7:0] din;
+ //Reset decoder
   
   
   always@(posedge uclk)
